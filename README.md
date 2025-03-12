@@ -1,0 +1,1 @@
+# modello-dotnet-sharedkernel
