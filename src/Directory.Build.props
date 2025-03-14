@@ -1,0 +1,19 @@
+<Project>
+	<PropertyGroup>
+		<LangVersion>latest</LangVersion>
+		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+		<Authors>Gabriel (@gasbrieo)</Authors>
+		<PackageProjectUrl>https://github.com/gasbrieo/modello-dotnet-foundation</PackageProjectUrl>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
+		<PackageLicenseFile>LICENSE</PackageLicenseFile>
+		<PublishRepositoryUrl>true</PublishRepositoryUrl>
+		<RepositoryUrl>https://github.com/gasbrieo/modello-dotnet-foundation</RepositoryUrl>
+		<RepositoryType>git</RepositoryType>
+		<EmbedUntrackedSources>true</EmbedUntrackedSources>
+	</PropertyGroup>
+	
+	<ItemGroup Label="Package files">
+		<None Include="..\..\README.md" Visible="false" Pack="true" PackagePath="\" />
+		<None Include="..\..\LICENSE" Visible="false" Pack="true" PackagePath="\" />
+	</ItemGroup>
+</Project>

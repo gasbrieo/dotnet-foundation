@@ -6,6 +6,12 @@
 		<Nullable>enable</Nullable>
 	</PropertyGroup>
 
+	<PropertyGroup Label="Package info">
+		<PackageId>Modello.Foundation.AspNetCore</PackageId>
+		<PackageDescription>Modello.Foundation.AspNetCore</PackageDescription>
+		<Version>0.0.1-beta1</Version>
+	</PropertyGroup>
+
 	<ItemGroup>
 		<FrameworkReference Include="Microsoft.AspNetCore.App" />
 	</ItemGroup>

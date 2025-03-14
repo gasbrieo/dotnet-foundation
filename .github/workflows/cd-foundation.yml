@@ -1,0 +1,32 @@
+name: Publish Foundation
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  cd:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 9.0.x
+
+      - name: Build
+        run: dotnet build --configuration Release
+
+      - name: Test
+        run: dotnet test --configuration Release --no-build --no-restore
+
+      - name: Pack
+        run: dotnet pack src/Modello.Foundation/Modello.Foundation.csproj --configuration Release --no-build --no-restore --output ./nupkgs
+
+      - name: Publish
+        run: dotnet nuget push ./nupkgs/*.nupkg -k ${{ secrets.NUGET_API_KEY }} --skip-duplicate -s https://api.nuget.org/v3/index.json

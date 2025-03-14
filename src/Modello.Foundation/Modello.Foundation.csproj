@@ -6,4 +6,10 @@
         <Nullable>enable</Nullable>
     </PropertyGroup>
 
+	<PropertyGroup Label="Package info">
+		<PackageId>Modello.Foundation</PackageId>
+		<PackageDescription>Modello.Foundation</PackageDescription>
+		<Version>0.0.1-beta1</Version>
+	</PropertyGroup>
+
 </Project>
