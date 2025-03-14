@@ -1,7 +1,3 @@
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Moq;
-
 namespace Modello.Foundation.AspNetCore.Tests;
 
 public class ResultExtensionsTests
@@ -32,7 +28,7 @@ public class ResultExtensionsTests
         result.Setup(r => r.GetValue()).Returns("test value");
 
         // When
-        var actionResult = ResultExtensions.ToActionResult(_controller, result.Object);
+        var actionResult = ResultExtensions.ToActionResult(result.Object, _controller);
 
         // Then
         var okResult = Assert.IsType<OkObjectResult>(actionResult);
@@ -49,7 +45,7 @@ public class ResultExtensionsTests
         result.Setup(r => r.Errors).Returns([error]);
 
         // When
-        var actionResult = ResultExtensions.ToActionResult(_controller, result.Object);
+        var actionResult = ResultExtensions.ToActionResult(result.Object, _controller);
 
         // Then
         var badRequestResult = Assert.IsType<BadRequestObjectResult>(actionResult);
@@ -70,7 +66,7 @@ public class ResultExtensionsTests
         result.Setup(r => r.Status).Returns(ResultStatus.NotFound);
 
         // When
-        var actionResult = ResultExtensions.ToActionResult(_controller, result.Object);
+        var actionResult = ResultExtensions.ToActionResult(result.Object, _controller);
 
         // Then
         var notFoundResult = Assert.IsType<NotFoundObjectResult>(actionResult);
