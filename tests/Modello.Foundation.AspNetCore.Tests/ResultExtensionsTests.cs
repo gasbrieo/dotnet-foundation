@@ -78,5 +78,16 @@ public class ResultExtensionsTests
         Assert.Equal("The requested resource was not found.", notFoundResponse.Detail);
     }
 
+    [Fact]
+    public void GivenNonExistentResult_WhenToActionResultCalled_ThenThrowsNotSupportedException()
+    {
+        // Given
+        var result = new Mock<IResult>();
+        result.Setup(r => r.Status).Returns((ResultStatus)99);
+
+        // When & Then
+        Assert.Throws<NotSupportedException>(() => ResultExtensions.ToActionResult(result.Object, _controller));
+    }
+
     private class TestController : ControllerBase { }
 }
