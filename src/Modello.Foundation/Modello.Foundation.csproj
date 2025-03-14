@@ -6,10 +6,15 @@
         <Nullable>enable</Nullable>
     </PropertyGroup>
 
-	<PropertyGroup Label="Package info">
-		<PackageId>Modello.Foundation</PackageId>
-		<PackageDescription>Modello.Foundation</PackageDescription>
-		<Version>0.0.1-beta1</Version>
-	</PropertyGroup>
+    <PropertyGroup Label="Package info">
+        <PackageId>Modello.Foundation</PackageId>
+        <PackageDescription>Modello.Foundation</PackageDescription>
+        <Version>0.0.1</Version>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="FluentValidation" Version="11.11.0" />
+        <PackageReference Include="MediatR" Version="12.4.1" />
+    </ItemGroup>
 
 </Project>

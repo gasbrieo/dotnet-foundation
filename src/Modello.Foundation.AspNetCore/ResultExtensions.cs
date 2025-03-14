@@ -1,10 +1,8 @@
-using Microsoft.AspNetCore.Mvc;
-
 namespace Modello.Foundation.AspNetCore;
 
 public static partial class ResultExtensions
 {
-    public static IActionResult ToActionResult(this ControllerBase controller, IResult result)
+    public static IActionResult ToActionResult(this IResult result, ControllerBase controller)
     {
         return result.Status switch
         {

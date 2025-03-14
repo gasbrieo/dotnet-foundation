@@ -1,4 +1,4 @@
-﻿namespace Modello.Foundation;
+namespace Modello.Foundation;
 
 public interface IResult
 {
