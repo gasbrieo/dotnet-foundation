@@ -9,12 +9,13 @@
     <PropertyGroup Label="Package info">
         <PackageId>Modello.Foundation</PackageId>
         <PackageDescription>Modello.Foundation</PackageDescription>
-        <Version>0.0.2</Version>
+        <Version>0.0.3</Version>
     </PropertyGroup>
 
     <ItemGroup>
         <PackageReference Include="FluentValidation" Version="11.11.0" />
         <PackageReference Include="MediatR" Version="12.4.1" />
+        <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="9.0.3" />
     </ItemGroup>
 
 </Project>
