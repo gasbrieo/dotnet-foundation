@@ -36,6 +36,38 @@ public class ResultExtensionsTests
     }
 
     [Fact]
+    public void GivenCreatedResult_WhenToActionResultCalled_ThenReturnsCreatedResult()
+    {
+        // Given
+        var result = new Mock<IResult>();
+        result.Setup(r => r.Status).Returns(ResultStatus.Created);
+        result.Setup(r => r.GetValue()).Returns("test value");
+        result.Setup(r => r.Location).Returns("test location");
+
+        // When
+        var actionResult = ResultExtensions.ToActionResult(result.Object, _controller);
+
+        // Then
+        var createdResult = Assert.IsType<CreatedResult>(actionResult);
+        Assert.Equal("test value", createdResult.Value);
+        Assert.Equal("test location", createdResult.Location);
+    }
+
+    [Fact]
+    public void GivenNoContentResult_WhenToActionResultCalled_ThenReturnsNoContentResult()
+    {
+        // Given
+        var result = new Mock<IResult>();
+        result.Setup(r => r.Status).Returns(ResultStatus.NoContent);
+
+        // When
+        var actionResult = ResultExtensions.ToActionResult(result.Object, _controller);
+
+        // Then
+        Assert.IsType<NoContentResult>(actionResult);
+    }
+
+    [Fact]
     public void GivenErrorResult_WhenToActionResultCalled_ThenReturnsBadRequestResult()
     {
         // Given

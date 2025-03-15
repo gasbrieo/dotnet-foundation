@@ -2,13 +2,15 @@ namespace Modello.Foundation;
 
 public class Result<TValue> : IResult
 {
-    public TValue? Value { get; }
+    public TValue? Value { get; init; }
 
     public ResultStatus Status { get; protected set; } = ResultStatus.Ok;
 
     public bool IsSuccess => Status is ResultStatus.Ok;
 
     public IEnumerable<ValidationError> Errors { get; protected set; } = [];
+
+    public string Location { get; protected set; } = string.Empty;
 
     protected Result() { }
 
@@ -19,6 +21,14 @@ public class Result<TValue> : IResult
     public object? GetValue() => Value;
 
     public static Result<TValue> Success(TValue value) => new(value);
+
+    public static Result<TValue> Created(TValue value, string location) => new(ResultStatus.Created)
+    {
+        Value = value,
+        Location = location
+    };
+
+    public static Result<TValue> NoContent() => new(ResultStatus.NoContent);
 
     public static Result<TValue> Error(params ValidationError[] errors) => new(ResultStatus.Error)
     {

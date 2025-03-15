@@ -7,6 +7,8 @@ public static partial class ResultExtensions
         return result.Status switch
         {
             ResultStatus.Ok => controller.Ok(result.GetValue()),
+            ResultStatus.Created => controller.Created(result.Location, result.GetValue()),
+            ResultStatus.NoContent => controller.NoContent(),
             ResultStatus.Error => BuildErrorResponse(controller, result),
             ResultStatus.NotFound => BuildNotFoundResponse(controller),
             _ => throw new NotSupportedException($"Result {result.Status} conversion is not supported."),
@@ -18,7 +20,7 @@ public static partial class ResultExtensions
         var errorResponse = new ErrorListResponse(
             controller.HttpContext.Request.Path,
             controller.HttpContext.TraceIdentifier,
-            result.Errors.Select(e => new ErrorDetail(e.Type, e.Error, e.Detail)).ToList()
+            result.Errors.Select(e => new ErrorDetail(e.Type, e.Error, e.Detail))
         );
 
         return controller.BadRequest(errorResponse);

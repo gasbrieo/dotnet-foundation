@@ -86,20 +86,6 @@ public class ResultTests
         Assert.True(result.IsSuccess);
     }
 
-    [Fact]
-    public void Given_WhenInitializeSuccessUsingGenericFactory_ThenSetsStatusToOk()
-    {
-        // Given
-
-        // When
-        var result = Result.Success();
-
-        // Then
-        Assert.Equal(ResultStatus.Ok, result.Status);
-        Assert.Null(result.Value);
-        Assert.True(result.IsSuccess);
-    }
-
     [Theory]
     [InlineData("test string")]
     [InlineData(123)]
@@ -115,6 +101,68 @@ public class ResultTests
         Assert.Equal(ResultStatus.Ok, result.Status);
         Assert.Equal(value, result.Value);
         Assert.True(result.IsSuccess);
+    }
+
+    [Theory]
+    [InlineData("test string")]
+    [InlineData(123)]
+    [InlineData(true)]
+    public void GivenValueAndLocation_WhenInitializeCreatedUsingFactory_ThenSetsStatusToCreated(object value)
+    {
+        // Given
+        var location = "test string";
+
+        // When
+        var result = Result<object>.Created(value, location);
+
+        // Then
+        Assert.Equal(ResultStatus.Created, result.Status);
+        Assert.Equal(location, result.Location);
+        Assert.False(result.IsSuccess);
+    }
+
+    [Theory]
+    [InlineData("test string")]
+    [InlineData(123)]
+    [InlineData(true)]
+    public void GivenValueAndLocation_WhenInitializeCreatedUsingGenericFactory_ThenSetsStatusToCreated(object value)
+    {
+        // Given
+        var location = "test string";
+
+        // When
+        var result = Result.Created(value, location);
+
+        // Then
+        Assert.Equal(ResultStatus.Created, result.Status);
+        Assert.Equal(location, result.Location);
+        Assert.False(result.IsSuccess);
+    }
+
+    [Fact]
+    public void Given_WhenInitializeNoContentUsingFactory_ThenSetsStatusToNoContent()
+    {
+        // Given
+
+        // When
+        var result = Result<object>.NoContent();
+
+        // Then
+        Assert.Equal(ResultStatus.NoContent, result.Status);
+        Assert.False(result.IsSuccess);
+    }
+
+    [Fact]
+    public void Given_WhenInitializeNoContentUsingGenericFactory_ThenSetsStatusToNoContent()
+    {
+        // Given
+
+        // When
+        var result = Result.NoContent();
+
+        // Then
+        Assert.Equal(ResultStatus.NoContent, result.Status);
+        Assert.False(result.IsSuccess);
     }
 
     [Fact]

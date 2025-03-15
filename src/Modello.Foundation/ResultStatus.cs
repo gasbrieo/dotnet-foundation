@@ -1,8 +1,10 @@
-﻿namespace Modello.Foundation;
+namespace Modello.Foundation;
 
 public enum ResultStatus
 {
     Ok,
+    Created,
+    NoContent,
     Error,
     NotFound
 }

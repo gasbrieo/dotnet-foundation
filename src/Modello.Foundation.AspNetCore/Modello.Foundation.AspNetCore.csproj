@@ -9,7 +9,7 @@
     <PropertyGroup Label="Package info">
         <PackageId>Modello.Foundation.AspNetCore</PackageId>
         <PackageDescription>Modello.Foundation.AspNetCore</PackageDescription>
-        <Version>0.0.1</Version>
+        <Version>0.0.2</Version>
     </PropertyGroup>
 
     <ItemGroup>
