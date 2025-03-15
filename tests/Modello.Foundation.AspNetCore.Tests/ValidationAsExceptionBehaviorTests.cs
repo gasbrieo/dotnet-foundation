@@ -1,10 +1,10 @@
 namespace Modello.Foundation.AspNetCore.Tests;
 
-public class ValidationBehaviorTests
+public class ValidationAsExceptionBehaviorTests
 {
     private readonly Mock<RequestHandlerDelegate<int>> _delegateMock = new();
 
-    public ValidationBehaviorTests()
+    public ValidationAsExceptionBehaviorTests()
     {
         _delegateMock.Setup(n => n()).ReturnsAsync(1);
     }
@@ -15,7 +15,7 @@ public class ValidationBehaviorTests
         // Given
         var request = new ConcreteRequest(string.Empty);
         var validators = new List<IValidator<ConcreteRequest>>();
-        var behavior = new ValidationBehavior<ConcreteRequest, int>(validators);
+        var behavior = new ValidationAsExceptionBehavior<ConcreteRequest, int>(validators);
 
         // When
         var response = await behavior.Handle(request, _delegateMock.Object, CancellationToken.None);
@@ -32,7 +32,7 @@ public class ValidationBehaviorTests
         // Given
         var request = new ConcreteRequest("Name");
         var validators = new List<IValidator<ConcreteRequest>> { new ConcreteRequestValidator() };
-        var behavior = new ValidationBehavior<ConcreteRequest, int>(validators);
+        var behavior = new ValidationAsExceptionBehavior<ConcreteRequest, int>(validators);
 
         // When
         var response = await behavior.Handle(request, _delegateMock.Object, CancellationToken.None);
@@ -49,7 +49,7 @@ public class ValidationBehaviorTests
         // Given
         var request = new ConcreteRequest(string.Empty);
         var validators = new List<IValidator<ConcreteRequest>> { new ConcreteRequestValidator() };
-        var behavior = new ValidationBehavior<ConcreteRequest, int>(validators);
+        var behavior = new ValidationAsExceptionBehavior<ConcreteRequest, int>(validators);
 
         // When & Then
         await Assert.ThrowsAsync<ValidationException>(() => behavior.Handle(request, _delegateMock.Object, CancellationToken.None));

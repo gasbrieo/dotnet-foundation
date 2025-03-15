@@ -1,12 +1,12 @@
 namespace Modello.Foundation.AspNetCore.Tests;
 
-public class ResultValidationBehaviorTests
+public class ValidationAsResultBehaviorTests
 {
-    private readonly Mock<RequestHandlerDelegate<IResult>> _delegateMock = new();
+    private readonly Mock<RequestHandlerDelegate<Result<int>>> _delegateMock = new();
 
-    public ResultValidationBehaviorTests()
+    public ValidationAsResultBehaviorTests()
     {
-        _delegateMock.Setup(n => n()).ReturnsAsync(Result.Success(1));
+        _delegateMock.Setup(n => n()).ReturnsAsync(1);
     }
 
     [Fact]
@@ -15,7 +15,7 @@ public class ResultValidationBehaviorTests
         // Given
         var request = new ConcreteRequest(string.Empty);
         var validators = new List<IValidator<ConcreteRequest>>();
-        var behavior = new ResultValidationBehavior<ConcreteRequest>(validators);
+        var behavior = new ValidationAsResultBehavior<ConcreteRequest, Result<int>>(validators);
 
         // When
         var response = await behavior.Handle(request, _delegateMock.Object, CancellationToken.None);
@@ -32,7 +32,7 @@ public class ResultValidationBehaviorTests
         // Given
         var request = new ConcreteRequest("Name");
         var validators = new List<IValidator<ConcreteRequest>> { new ConcreteRequestValidator() };
-        var behavior = new ResultValidationBehavior<ConcreteRequest>(validators);
+        var behavior = new ValidationAsResultBehavior<ConcreteRequest, Result<int>>(validators);
 
         // When
         var response = await behavior.Handle(request, _delegateMock.Object, CancellationToken.None);
@@ -49,7 +49,7 @@ public class ResultValidationBehaviorTests
         // Given
         var request = new ConcreteRequest(string.Empty);
         var validators = new List<IValidator<ConcreteRequest>> { new ConcreteRequestValidator() };
-        var behavior = new ResultValidationBehavior<ConcreteRequest>(validators);
+        var behavior = new ValidationAsResultBehavior<ConcreteRequest, Result<int>>(validators);
 
         // When
         var response = await behavior.Handle(request, _delegateMock.Object, CancellationToken.None);
