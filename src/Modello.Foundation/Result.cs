@@ -1,4 +1,4 @@
-﻿namespace Modello.Foundation;
+namespace Modello.Foundation;
 
 public class Result<TValue> : IResult
 {
@@ -17,17 +17,6 @@ public class Result<TValue> : IResult
     protected Result(ResultStatus status) => Status = status;
 
     public object? GetValue() => Value;
-
-    public PagedResult<TValue> ToPagedResult(PagedInfo pagedInfo)
-    {
-        var pagedResult = new PagedResult<TValue>(pagedInfo, Value)
-        {
-            Status = Status,
-            Errors = Errors
-        };
-
-        return pagedResult;
-    }
 
     public static Result<TValue> Success(TValue value) => new(value);
 

@@ -1,4 +1,4 @@
-﻿namespace Modello.Foundation.Tests;
+namespace Modello.Foundation.Tests;
 
 public class ResultTests
 {
@@ -198,24 +198,6 @@ public class ResultTests
 
         // Then
         Assert.Null(value);
-    }
-
-    [Fact]
-    public void GivenResult_WhenConvertToPagedResult_ThenPropertiesAreSetCorrectly()
-    {
-        // Given
-        var pagedInfo = new PagedInfo(1, 10, 100, 10);
-        var value = "test string";
-        var result = new Result<string>(value);
-
-        // When
-        var pagedResult = result.ToPagedResult(pagedInfo);
-
-        // Then
-        Assert.Equal(pagedInfo, pagedResult.PagedInfo);
-        Assert.Equal(value, pagedResult.Value);
-        Assert.Equal(result.Status, pagedResult.Status);
-        Assert.Equal(result.Errors, pagedResult.Errors);
     }
 
     [Fact]

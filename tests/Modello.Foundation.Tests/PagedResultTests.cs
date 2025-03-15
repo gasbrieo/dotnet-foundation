@@ -1,4 +1,4 @@
-﻿namespace Modello.Foundation.Tests;
+namespace Modello.Foundation.Tests;
 
 public class PagedResultTests
 {
@@ -7,7 +7,7 @@ public class PagedResultTests
     {
         // Given
         var pagedInfo = new PagedInfo(1, 10, 100, 10);
-        var value = "test value";
+        var value = new List<string>() { "test value" };
 
         // When
         var pagedResult = new PagedResult<string>(pagedInfo, value);
