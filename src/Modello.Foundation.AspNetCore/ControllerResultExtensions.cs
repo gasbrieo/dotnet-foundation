@@ -1,6 +1,6 @@
 namespace Modello.Foundation.AspNetCore;
 
-public static partial class ResultExtensions
+public static partial class ControllerResultExtensions
 {
     public static IActionResult ToActionResult(this IResult result, ControllerBase controller)
     {
