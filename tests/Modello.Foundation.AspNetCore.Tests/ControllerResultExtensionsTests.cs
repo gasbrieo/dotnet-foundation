@@ -1,10 +1,10 @@
 namespace Modello.Foundation.AspNetCore.Tests;
 
-public class ResultExtensionsTests
+public class ControllerResultExtensionsTests
 {
     private readonly TestController _controller;
 
-    public ResultExtensionsTests()
+    public ControllerResultExtensionsTests()
     {
         _controller = new TestController
         {
@@ -28,7 +28,7 @@ public class ResultExtensionsTests
         result.Setup(r => r.GetValue()).Returns("test value");
 
         // When
-        var actionResult = ResultExtensions.ToActionResult(result.Object, _controller);
+        var actionResult = ControllerResultExtensions.ToActionResult(result.Object, _controller);
 
         // Then
         var okResult = Assert.IsType<OkObjectResult>(actionResult);
@@ -45,7 +45,7 @@ public class ResultExtensionsTests
         result.Setup(r => r.Location).Returns("test location");
 
         // When
-        var actionResult = ResultExtensions.ToActionResult(result.Object, _controller);
+        var actionResult = ControllerResultExtensions.ToActionResult(result.Object, _controller);
 
         // Then
         var createdResult = Assert.IsType<CreatedResult>(actionResult);
@@ -61,7 +61,7 @@ public class ResultExtensionsTests
         result.Setup(r => r.Status).Returns(ResultStatus.NoContent);
 
         // When
-        var actionResult = ResultExtensions.ToActionResult(result.Object, _controller);
+        var actionResult = ControllerResultExtensions.ToActionResult(result.Object, _controller);
 
         // Then
         Assert.IsType<NoContentResult>(actionResult);
@@ -77,7 +77,7 @@ public class ResultExtensionsTests
         result.Setup(r => r.Errors).Returns([error]);
 
         // When
-        var actionResult = ResultExtensions.ToActionResult(result.Object, _controller);
+        var actionResult = ControllerResultExtensions.ToActionResult(result.Object, _controller);
 
         // Then
         var badRequestResult = Assert.IsType<BadRequestObjectResult>(actionResult);
@@ -98,7 +98,7 @@ public class ResultExtensionsTests
         result.Setup(r => r.Status).Returns(ResultStatus.NotFound);
 
         // When
-        var actionResult = ResultExtensions.ToActionResult(result.Object, _controller);
+        var actionResult = ControllerResultExtensions.ToActionResult(result.Object, _controller);
 
         // Then
         var notFoundResult = Assert.IsType<NotFoundObjectResult>(actionResult);
@@ -118,7 +118,7 @@ public class ResultExtensionsTests
         result.Setup(r => r.Status).Returns((ResultStatus)99);
 
         // When & Then
-        Assert.Throws<NotSupportedException>(() => ResultExtensions.ToActionResult(result.Object, _controller));
+        Assert.Throws<NotSupportedException>(() => ControllerResultExtensions.ToActionResult(result.Object, _controller));
     }
 
     private class TestController : ControllerBase { }
