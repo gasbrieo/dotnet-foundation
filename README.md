@@ -1,1 +1,1 @@
-# modello-dotnet-sharedkernel
+# .NET Foundation
